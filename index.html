@@ -1,106 +1,138 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Promo Script Auto Payment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>YANSCRIPT STORE</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: url('https://files.catbox.moe/bijf6x.jpg') no-repeat center center fixed;
+    * {
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .bg-blur {
+      background: url('https://img1.pixhost.to/images/6219/607047740_decode-barmodss.jpg') no-repeat center center fixed;
       background-size: cover;
-      color: white;
-      text-align: center;
-      padding: 2rem;
+      filter: blur(10px);
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1;
     }
-    .container {
-      background-color: rgba(0, 0, 0, 0.7);
-      border-radius: 20px;
-      padding: 2rem;
-      max-width: 500px;
-      margin: auto;
+    .text-glow {
+      color: #7dd3fc;
+      text-shadow: 0 0 10px #7dd3fc;
     }
-    .promo-title {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #ffd700;
+    .border-glow {
+      border: 2px solid #86efac;
+      box-shadow: 0 0 10px #86efac;
     }
-    .price-old {
-      text-decoration: line-through;
-      color: #ff4444;
+    .floating-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 50;
     }
-    .price-new {
-      font-size: 1.8rem;
-      color: #00ff99;
-      margin-bottom: 1rem;
-    }
-    .countdown {
-      font-size: 1.5rem;
-      margin-top: 1rem;
-      color: #ffcc00;
-    }
-    .payment {
-      margin-top: 2rem;
-    }
-    .payment img {
-      max-width: 200px;
-      border-radius: 10px;
-      margin: 1rem 0;
-    }
-    .btn {
-      background-color: #00aaff;
-      color: white;
-      padding: 0.7rem 1.5rem;
-      margin: 0.5rem;
-      border: none;
-      border-radius: 8px;
+    .floating-btn img {
+      width: 40px;
+      height: 40px;
       cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
     }
-    .footer {
-      margin-top: 2rem;
-      font-size: 0.9rem;
-      color: #ccc;
+    .mc-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #10b981;
+      color: white;
+      font-weight: bold;
+      padding: 10px 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #10b981;
+      cursor: pointer;
+      z-index: 50;
     }
   </style>
 </head>
-<body>
-  <div class="container">
-    <h1 class="promo-title">🔥 Promo Script Auto Payment 🔥</h1>
-    <p><span class="price-old">Rp50.000</span> ➜ <span class="price-new">Rp39.000</span></p><div class="countdown">
-  Promo berakhir dalam: <span id="timer">00:00:10</span>
-</div>
+<body class="bg-gray-900 text-white relative">
 
-<div class="payment">
-  <h3>💳 Pembayaran:</h3>
-  <p>DANA: 0852-3584-3198</p>
-  <img src="https://files.catbox.moe/n1nr5w.png" alt="QRIS" />
-  <div>
-    <a href="https://wa.me/6283134103290" class="btn">📤 Kirim Bukti ke WhatsApp</a>
-    <a href="https://t.me/yanosama" class="btn">📤 Kirim Bukti ke Telegram</a>
+  <!-- Background Blur -->
+  <div class="bg-blur"></div>
+
+  <!-- Loading Screen -->
+  <div id="loadingScreen" class="fixed inset-0 bg-black flex flex-col items-center justify-center z-50 text-center">
+    <h1 class="text-glow text-2xl mb-4">Loading...</h1>
+    <p class="text-gray-300 mb-2">Selamat datang di YANSCRIPT STORE</p>
+    <p class="text-gray-400 text-sm">Website jual beli produk digital terpercaya</p>
   </div>
-</div>
 
-<div class="footer">
-  <p>Made by YanScript | © Powered by YST-TEAM</p>
-</div>
+  <!-- MC Button -->
+  <div class="mc-button" onclick="alert('Fitur MC (Jasa Rekber) aktif. Silakan hubungi admin untuk transaksi aman.')">🛡️ MC</div>
 
-  </div>  <script>
-    // Countdown Timer 30 minutes
-    let totalSeconds = 30 * 60;
-    const timerElement = document.getElementById("timer");
+  <!-- Floating Contact Buttons -->
+  <div class="floating-btn">
+    <a href="https://wa.me/6283134103290" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp"></a>
+    <a href="https://t.me/Csystteam" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram"></a>
+  </div>
 
-    const updateTimer = () => {
-      const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
-      const seconds = String(totalSeconds % 60).padStart(2, '0');
-      timerElement.textContent = `00:${minutes}:${seconds}`;
-      if (totalSeconds > 0) {
-        totalSeconds--;
-      }
-    };
+  <!-- Main Content -->
+  <main id="mainContent" class="hidden max-w-5xl mx-auto px-6 py-16">
+    <h1 class="text-glow text-3xl font-bold mb-10 text-center">YANSCRIPT STORE</h1>
 
-    updateTimer();
-    setInterval(updateTimer, 1000);
-  </script></body>
-</html>
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold text-glow mb-4">📦 Script Bot</h2>
+      <ul class="space-y-2">
+        <li class="border-glow p-4 rounded">🔥 Demon Crash — <span class="font-bold">Rp35.000</span></li>
+        <li class="border-glow p-4 rounded">⚙️ Auto Create Script — <span class="font-bold">Rp25.000</span></li>
+      </ul>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold text-glow mb-4">🖥️ Panel Hosting</h2>
+      <ul class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        <li class="border-glow p-3 rounded text-center">1GB</li>
+        <li class="border-glow p-3 rounded text-center">2GB</li>
+        <li class="border-glow p-3 rounded text-center">3GB</li>
+        <li class="border-glow p-3 rounded text-center">4GB</li>
+        <li class="border-glow p-3 rounded text-center">5GB</li>
+        <li class="border-glow p-3 rounded text-center">6GB</li>
+        <li class="border-glow p-3 rounded text-center">7GB</li>
+        <li class="border-glow p-3 rounded text-center">8GB</li>
+        <li class="border-glow p-3 rounded text-center">9GB</li>
+        <li class="border-glow p-3 rounded text-center">Unlimited</li>
+      </ul>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold text-glow mb-4">🌐 VPS Digital Ocean</h2>
+      <ul class="space-y-2">
+        <li class="border-glow p-4 rounded">R1C2</li>
+        <li class="border-glow p-4 rounded">R3C2</li>
+        <li class="border-glow p-4 rounded">R16C4</li>
+        <li class="border-glow p-4 rounded">R38C8</li>
+      </ul>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold text-glow mb-4">❓ Produk Lainnya</h2>
+      <p class="border-glow p-4 rounded">Tanyakan langsung ke admin untuk info produk lainnya.</p>
+    </section>
+
+    <section class="text-sm text-gray-400 border-t border-gray-700 pt-6">
+      <h3 class="text-lg text-glow font-semibold mb-2">🔐 Privacy Policy</h3>
+      <p>Data Anda aman dan tidak akan dibagikan kepada pihak ketiga. Kami hanya menggunakan informasi untuk keperluan transaksi.</p>
+    </section>
+  </main>
+
+  <script>
+    const loadingScreen = document.getElementById("loadingScreen");
+    const mainContent = document.getElementById("mainContent");
+
+    // Tampilkan loading selama 2–10 detik
+    const delay = Math.floor(Math.random() * (10000 - 2000 + 1)) + 2000;
+    setTimeout(() => {
+      loadingScreen.style.display = "none";
+      mainContent.classList.remove("hidden");
+    }, delay);
+  </script>
+</body>
+                                                                                              </html>
